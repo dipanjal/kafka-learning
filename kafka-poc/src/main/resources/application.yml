@@ -1,0 +1,14 @@
+spring:
+  kafka:
+    bootstrap-servers: ${BROKERS:ec2-175-41-177-134.ap-southeast-1.compute.amazonaws.com:9092}
+    producer:
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 1
+    consumer:
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      group-id: poc_consumer_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
