@@ -1,14 +1,12 @@
-package com.poc.kafka.model;
+package com.poc.kafka.model.message;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class PaymentMessage extends KafkaMessage {
     private String productName;
     private String productId;

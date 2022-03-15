@@ -3,7 +3,7 @@ package com.poc.kafka.producer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poc.kafka.config.KafkaConfig;
-import com.poc.kafka.model.KafkaMessage;
+import com.poc.kafka.model.message.KafkaMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,15 +17,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class POCProducer<T extends KafkaMessage> {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
-    private final ObjectMapper objectMapper;
+    private final KafkaTemplate<String, T> kafkaTemplate;
 
-    public String produce(T message) throws JsonProcessingException {
+    public String produce(T message) {
         message.setMessageId(UUID.randomUUID().toString());
         message.setDateTime(new Date());
-        String json = objectMapper.writeValueAsString(message);
         log.info("Producing {}", message);
-        kafkaTemplate.send(KafkaConfig.POC_TOPIC, json);
+        kafkaTemplate.send(KafkaConfig.POC_TOPIC, "payment-key", message);
         return message.getMessageId();
     }
 }

@@ -1,7 +1,7 @@
 package com.poc.kafka.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.poc.kafka.model.PaymentMessage;
+import com.poc.kafka.model.message.PaymentMessage;
 import com.poc.kafka.model.request.PaymentRequest;
 import com.poc.kafka.producer.POCProducer;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,7 @@
 package com.poc.kafka.consumer;
 
 import com.poc.kafka.config.KafkaConfig;
+import com.poc.kafka.model.message.PaymentMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class POCConsumer {
 
     @KafkaListener(topics = KafkaConfig.POC_TOPIC, groupId = KafkaConfig.POC_CONSUMER_GROUP)
-    public void consume(ConsumerRecord<String, String> record) {
+    public void consumePayment(ConsumerRecord<String, PaymentMessage> record) {
         log.info("Topic: {}", record.topic());
         log.info("Partition: {}", record.partition());
         log.info("Offset: {}", record.offset());

@@ -1,4 +1,4 @@
-package com.poc.kafka.model;
+package com.poc.kafka.model.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
