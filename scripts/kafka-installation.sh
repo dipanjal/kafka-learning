@@ -33,3 +33,22 @@ echo "exit open a new terminal to get the reflection"
 
 # SET Kafka Heap Size
 export KAFKA_HEAP_OPTS="-Xmx400M -Xms400M"
+
+# Setting up Kafka As a Service
+cat <<EOF | sudo tee /etc/systemd/system/kafka.service
+
+[Unit]
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/home/ubuntu/kafka_2.12-3.1.0/bin/kafka-server-start.sh /home/ubuntu/kafka_2.12-3.1.0/config/server.properties
+ExecStop=/home/ubuntu/kafka_2.12-3.1.0/bin/kafka-server-stop.sh
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
