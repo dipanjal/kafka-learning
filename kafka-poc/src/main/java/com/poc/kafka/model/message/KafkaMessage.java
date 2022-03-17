@@ -1,9 +1,6 @@
 package com.poc.kafka.model.message;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,6 +9,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class KafkaMessage implements Serializable {
     private String messageId;
     private Date dateTime;

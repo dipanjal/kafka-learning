@@ -6,9 +6,10 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 public class PaymentMessage extends KafkaMessage {
     private String productName;
-    private String productId;
+    private long productId;
+    private String category;
     private String walletId;
 }

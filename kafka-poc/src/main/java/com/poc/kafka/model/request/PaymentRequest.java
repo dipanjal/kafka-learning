@@ -10,7 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PaymentRequest {
+    private long productId;
     private String productName;
-    private String productId;
+    private String category;
     private String walletId;
 }
