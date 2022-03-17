@@ -11,13 +11,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class POCConsumer {
 
-    @KafkaListener(topics = KafkaConstants.TOPIC_POC, groupId = KafkaConstants.CONSUMER_GROUP_POC)
+    @KafkaListener(topics = KafkaConstants.TOPIC_PAYMENT, groupId = KafkaConstants.CONSUMER_GROUP_PAYMENT)
     public void consumePayment(ConsumerRecord<String, PaymentMessage> record) {
-        log.info("Topic: {}", record.topic());
-        log.info("Partition: {}", record.partition());
-        log.info("Offset: {}", record.offset());
-        log.info("Headers: {}", record.headers());
-        log.info("Message Key: {}", record.key());
-        log.info("Message Consumed: {}", record.value());
+        log.info("*** Consumed Topic: {} | Partition: {} | Offset: {} | MessageKey: {} | Payload: {}",
+                record.topic(), record.partition(), record.offset(), record.key(), record.value()
+        );
     }
 }

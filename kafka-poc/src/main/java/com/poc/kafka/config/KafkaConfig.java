@@ -10,10 +10,17 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaConfig {
 
     @Bean
-    public NewTopic kafkaPoCTopic() {
-        return TopicBuilder.name(KafkaConstants.TOPIC_POC)
+    public NewTopic kafkaPaymentTopic() {
+        return TopicBuilder.name(KafkaConstants.TOPIC_PAYMENT)
                 .partitions(3)
                 .replicas(1)
+                .build();
+    }
+
+    /** Topic For Integration Test */
+    @Bean
+    public NewTopic kafkaTestTopic() {
+        return TopicBuilder.name(KafkaConstants.TOPIC_TEST)
                 .build();
     }
 }

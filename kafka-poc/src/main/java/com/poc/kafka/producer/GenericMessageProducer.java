@@ -20,14 +20,25 @@ public class GenericMessageProducer<K, V extends KafkaMessage> {
 
     private final KafkaTemplate<K, V> kafkaTemplate;
 
+    public String produce(String topic, V payload) {
+        return produce(topic, null, payload);
+    }
+
     public String produce(String topic, K key, V payload) {
         payload.setMessageId(UUID.randomUUID().toString());
         payload.setDateTime(new Date());
-        log.info("Producing {}", payload);
 
-        ProducerRecord<K, V> record = new ProducerRecord<>(topic, key, payload);
+        ProducerRecord<K, V> record = key != null
+                ? new ProducerRecord<>(topic, key, payload)
+                : new ProducerRecord<>(topic, payload);
+
 //        Message<T> message = MessageBuilder.withPayload(payload).build();
 
+        this.publishToBroker(record);
+        return payload.getMessageId();
+    }
+
+    private void publishToBroker(ProducerRecord<K, V> record) {
         kafkaTemplate.send(record)
                 .addCallback(new ListenableFutureCallback<>() {
                     @Override
@@ -38,10 +49,12 @@ public class GenericMessageProducer<K, V extends KafkaMessage> {
                     @Override
                     public void onSuccess(SendResult<K, V> result) {
                         RecordMetadata metadata = result.getRecordMetadata();
-                        log.info("Payload: {} ", result.getProducerRecord().value());
-                        log.info("Delivered to Topic: {} | Partition: {} |  Offset {}", metadata.topic(), metadata.partition(), metadata.offset());
+
+                        log.info("### Delivered to Topic: {} | Partition: {} |  Offset {} | Timestamp {} | Payload: {}",
+                                metadata.topic(), metadata.partition(), metadata.offset(), metadata.timestamp(),
+                                result.getProducerRecord().value()
+                        );
                     }
                 });
-        return payload.getMessageId();
     }
 }

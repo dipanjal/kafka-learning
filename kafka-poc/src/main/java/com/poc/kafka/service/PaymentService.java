@@ -15,7 +15,7 @@ public class PaymentService {
 
     public String pay(PaymentRequest request) {
         return paymentMessageProducer.produce(
-                KafkaConstants.TOPIC_POC,
+                KafkaConstants.TOPIC_PAYMENT,
                 request.getCategory(),
                 new PaymentMessage(request.getProductName(), request.getProductId(), request.getCategory(), request.getWalletId())
         );

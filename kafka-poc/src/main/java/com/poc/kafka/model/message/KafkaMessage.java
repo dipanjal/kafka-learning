@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class KafkaMessage implements Serializable {
+public abstract class KafkaMessage implements Serializable {
     private String messageId;
     private Date dateTime;
 }
