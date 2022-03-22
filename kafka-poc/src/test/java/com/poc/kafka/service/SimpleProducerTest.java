@@ -7,6 +7,7 @@ import com.poc.kafka.producer.GenericMessageProducer;
 import lombok.Getter;
 import lombok.ToString;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class SimpleProducerTest {
     private GenericMessageProducer<String, SimpleTestMessage> stringMessageProducer;
 
     @Test
+    @Disabled
     public void paymentTest() throws InterruptedException {
         for(int i=0; i<3; i++) {
 
