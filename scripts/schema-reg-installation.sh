@@ -1,7 +1,20 @@
 sudo apt update
-wget -qO - https://packages.confluent.io/deb/7.0/archive.key | sudo apt-key add -
 
-sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/7.0 stable main"
-sudo add-apt-repository "deb https://packages.confluent.io/clients/deb $(lsb_release -cs) main"
+# install Java JRE
+sudo apt install default-jre -y
+java -version
+sleep 2s
 
-sudo apt-get update && sudo apt-get install confluent-platform -y
+# Download Confluent Platform
+wget https://packages.confluent.io/archive/7.0/confluent-7.0.1.tar.gz
+# Extracting tar archive
+sleep 2s
+tar -xzvf confluent-7.0.1.tar.gz
+
+# Path Configuration
+sleep 2s
+echo export CONFLUENT_HOME='$HOME/confluent-7.0.1' >> .profile
+echo export PATH='$PATH:$CONFLUENT_HOME/bin' >> .profile
+echo "Exit the terminal and re-open the session"
+
+schema-registry-start ./etc/schema-registry/schema-registry.properties
