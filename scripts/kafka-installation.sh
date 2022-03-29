@@ -52,3 +52,6 @@ Restart=on-abnormal
 WantedBy=multi-user.target
 
 EOF
+
+sleep 2s
+sudo systemctl daemon-reload
