@@ -16,3 +16,9 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "com.poc.kafka.model.message"
+  elasticsearch:
+    uris: 54.151.131.189:9200
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
