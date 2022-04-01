@@ -23,3 +23,7 @@ kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost
 
 # start a consumer to listen to the specific topic
 kafka-console-consumer.sh --topic quickstart-events --bootstrap-server localhost:9092
+
+#Start a console consumer to test
+kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+kafka-console-consumer.sh --topic _schemas --from-beginning --bootstrap-server localhost:9092

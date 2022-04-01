@@ -1,13 +1,13 @@
 spring:
   kafka:
-    bootstrap-servers: ${BROKERS:http://ec2-13-212-210-113.ap-southeast-1.compute.amazonaws.com:9092}
+    bootstrap-servers: ${BROKERS:http://ec2-3-0-17-224.ap-southeast-1.compute.amazonaws.com:9092}
     producer:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       acks: 1
       properties:
-        schema.registry.url: ${SCHEMA_REGISTRY_URL:http://ec2-13-212-210-113.ap-southeast-1.compute.amazonaws.com:8081}
+        schema.registry.url: ${SCHEMA_REGISTRY_URL:http://ec2-3-0-17-224.ap-southeast-1.compute.amazonaws.com:8081}
     consumer:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       group-id: poc_consumer_group

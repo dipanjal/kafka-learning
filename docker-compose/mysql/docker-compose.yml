@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+
+  mysql-dbz:
+    image: debezium/example-mysql:0.5
+    container_name: mysql-dbz
+    environment:
+      MYSQL_ROOT_PASSWORD: debezium
+      MYSQL_USER: debezium
+    volumes:
+      - ./mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+    #   - ./master/data:/var/lib/mysql
+    #   - ./master/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3306:3306
+    # networks:
+    #   - mysql_cluster_net 
