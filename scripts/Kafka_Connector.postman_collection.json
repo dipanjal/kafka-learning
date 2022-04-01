@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "418f7df1-2e1f-4b9b-ae4b-bd6e8a97adde",
+		"name": "Connector",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register Debezium MySql Connector",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"inventory-connector\",\r\n  \"config\": {\r\n    \"connector.class\": \"io.debezium.connector.mysql.MySqlConnector\",\r\n    \"tasks.max\": \"1\",\r\n    \"database.hostname\": \"localhost\",\r\n    \"database.port\": \"3306\",\r\n    \"database.user\": \"root\",\r\n    \"database.password\": \"password\",\r\n    \"database.server.id\": \"223344\",\r\n    \"database.server.name\": \"daraz\",\r\n    \"database.whitelist\": \"inventory\",\r\n    \"database.history.kafka.bootstrap.servers\": \"localhost:9092\",\r\n    \"database.history.kafka.topic\": \"schema-changes.inventory\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "54.254.9.105:8083/connectors",
+					"host": [
+						"54",
+						"254",
+						"9",
+						"105"
+					],
+					"port": "8083",
+					"path": [
+						"connectors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Elasticsearch Sink",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"elastic-sink\",\r\n    \"config\": {\r\n    \"connector.class\":\r\n    \"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector\",\r\n    \"tasks.max\": \"1\",\r\n    \"topics\": \"daraz.inventory.customers\",\r\n    \"connection.url\": \"http://localhost:9200\",\r\n    \"transforms\": \"unwrap,key\",\r\n    // \"transforms.unwrap.type\": \"io.debezium.transforms.UnwrapFromEnvelope\",\r\n    \"transforms.unwrap.type\": \"io.debezium.transforms.ExtractNewRecordState\",\r\n    \"transforms.key.type\": \"org.apache.kafka.connect.transforms.ExtractField$Key\",\r\n    \"transforms.key.field\": \"id\",\r\n    \"key.ignore\": \"false\",\r\n    \"type.name\": \"customer\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "54.254.9.105:8083/connectors",
+					"host": [
+						"54",
+						"254",
+						"9",
+						"105"
+					],
+					"port": "8083",
+					"path": [
+						"connectors"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
