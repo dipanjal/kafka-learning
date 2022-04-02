@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.util.List;
 
 @SpringBootTest
@@ -16,14 +17,14 @@ import java.util.List;
 public class ElasticSearchServiceTests {
 
     @Autowired
-    private ElasticSearchService elasticSearchService;
+    private ESCustomerService esCustomerService;
 
     @Autowired
     private ESCustomerRepository customerRepository;
 
     @Test
     public void findByFirstNameTest() {
-        List<Customer> names = elasticSearchService.searchCustomerByName("Jhon");
+        List<Customer> names = esCustomerService.searchCustomerByName("Jhon");
         Assertions.assertNotNull(names);
     }
 
@@ -41,5 +42,11 @@ public class ElasticSearchServiceTests {
         List<ESCustomer> customers = customerRepository.findESCustomerByEmailContaining("jp");
         customers.forEach(c -> log.info(c.toString()));
         Assertions.assertNotNull(customers);
+    }
+
+    @Test
+    public void restClientTest() throws IOException {
+        List<Customer> customers = esCustomerService.customerGlobalSearch("Main");
+        Assertions.assertNull(customers);
     }
 }

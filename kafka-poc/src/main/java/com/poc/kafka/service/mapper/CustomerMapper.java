@@ -11,7 +11,8 @@ public class CustomerMapper {
     public static Customer mapToCustomer(ESCustomer esCustomer) {
         return Customer.builder()
                 .id(esCustomer.getId())
-                .name(esCustomer.getFirstName().concat(" ").concat(esCustomer.getLastName()))
+                .firstName(esCustomer.getFirstName())
+                .lastName(esCustomer.getLastName())
                 .email(esCustomer.getEmail())
                 .build();
     }

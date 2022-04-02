@@ -20,13 +20,15 @@ public class ESCustomer {
     @Field(value = "last_name")
     private String lastName;
     private String email;
+    private String address;
 
     public ESCustomer() {}
 
-    public ESCustomer(String id, String firstName, String lastName, String email) {
+    public ESCustomer(String id, String firstName, String lastName, String email, String address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.address = address;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class SearchController {
     }
 
     @GetMapping("/search/customer/{phrase}")
-    public ResponseEntity<List<Customer>> searchCustomerByPhrase(@PathVariable final String phrase) {
-        return ResponseEntity.ok(searchService.searchCustomerByPhrase(phrase));
+    public ResponseEntity<List<Customer>> searchCustomerByPhrase(@PathVariable final String phrase) throws IOException {
+        return ResponseEntity.ok(searchService.customerGlobalSearch(phrase));
     }
 }
