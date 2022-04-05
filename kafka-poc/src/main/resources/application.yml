@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: mysql-to-es
   kafka:
     bootstrap-servers: ${BROKERS:http://ec2-3-0-17-224.ap-southeast-1.compute.amazonaws.com:9092}
     producer:
@@ -22,3 +24,12 @@ spring:
     elasticsearch:
       repositories:
         enabled: true
+
+mysql-to-es:
+  auto-log:
+    enabled: true
+    count: 10
+    delay: 1000
+
+  logstash:
+    host: ${LOGSTASH_HOST:54.151.131.189:9999}

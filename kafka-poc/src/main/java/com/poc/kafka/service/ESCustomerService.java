@@ -6,6 +6,7 @@ import com.poc.kafka.repository.es.ESCustomerRepository;
 import com.poc.kafka.service.mapper.CustomerMapper;
 import com.poc.kafka.service.mapper.SearchResponseMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ESCustomerService implements SearchService {
@@ -67,9 +69,12 @@ public class ESCustomerService implements SearchService {
     }
 
     private QueryBuilder buildDynamicQuery(String phrase, List<String> fields) {
+        log.info("Building dynamic query");
         BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
-        for(String field : fields)
+        for(String field : fields) {
             queryBuilder.should(QueryBuilders.matchPhrasePrefixQuery(field, phrase));
+            log.info("{} : {}", field, phrase);
+        }
         return queryBuilder;
     }
 }
