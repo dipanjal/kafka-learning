@@ -1,0 +1,30 @@
+version: '3.0'
+
+services:
+  schemaregistry:
+    image: confluentinc/cp-schema-registry:5.1.2
+    restart: always
+    networks:
+      - schemaregistry-net
+    environment:
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: "13.214.211.168:2181" #zookeeper
+      SCHEMA_REGISTRY_HOST_NAME: schemaregistry #same as docker-compose service name
+      SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8085"
+    ports:
+      - 5001:8085
+  
+  schemaregistry-ui:
+    image: landoop/schema-registry-ui
+    restart: always
+    networks:
+      - schemaregistry-net
+    environment:
+      SCHEMAREGISTRY_URL: http://schemaregistry:8085
+    ports:
+      - 8080:8080
+    depends_on:
+      - schemaregistry
+
+networks:
+  schemaregistry-net:
+    driver: bridge

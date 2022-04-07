@@ -1,11 +1,15 @@
 spring:
+  application:
+    name: mysql-to-es
   kafka:
-    bootstrap-servers: ${BROKERS:ec2-175-41-177-134.ap-southeast-1.compute.amazonaws.com:9092}
+    bootstrap-servers: ${BROKERS:http://ec2-3-0-17-224.ap-southeast-1.compute.amazonaws.com:9092}
     producer:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       acks: 1
+      properties:
+        schema.registry.url: ${SCHEMA_REGISTRY_URL:http://ec2-3-0-17-224.ap-southeast-1.compute.amazonaws.com:8081}
     consumer:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       group-id: poc_consumer_group
@@ -14,3 +18,18 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "com.poc.kafka.model.message"
+  elasticsearch:
+    uris: 54.151.131.189:9200
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+
+mysql-to-es:
+  auto-log:
+    enabled: false
+    count: 10
+    delay: 1000
+
+  logstash:
+    host: ${LOGSTASH_HOST:54.151.131.189:9999}

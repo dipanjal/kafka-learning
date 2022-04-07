@@ -1,0 +1,12 @@
+{
+  "type": "record",
+  "namespace": "com.poc.kafka.model.avro",
+  "name": "Payment",
+  "version": "1",
+  "fields": [
+    { "name": "productName", "type": "string", "doc": "Product Name" },
+    { "name": "productId", "type": "long", "doc": "Product identifier" },
+    { "name": "category", "type": "string", "doc": "Product Category" },
+    { "name": "walletId", "type": "string", "doc": "Customer wallet identifier" }
+  ]
+}

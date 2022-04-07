@@ -1,0 +1,106 @@
+kafka connect :
+
+Kafka Connect is a framework for connecting Kafka with external systems such as databases, key-value stores, search indexes, and file systems, using so-called Connectors.
+
+Kafka Connectors are ready-to-use components, which can help us to import data from external systems into Kafka topics and export data from Kafka topics into external systems.
+
+A source connector collects data from a system. Source systems can be entire databases, streams tables, or message brokers. A source connector could also collect metrics from application servers into Kafka topics, making the data available for stream processing with low latency.
+
+A sink connector delivers data from Kafka topics into other systems, which might be indexes such as Elasticsearch, batch systems such as Hadoop, or any kind of database.
+
+Kafka Connect features include:
+
+A framework for connecting external systems with Kafka – it simplifies the development, deployment, and management of connectors
+Distributed and standalone modes – it helps us to deploy large clusters by leveraging the distributed nature of Kafka, as well as setups for development, testing, and small production deployments
+REST interface – we can manage connectors using a REST API
+Automatic offset management – Kafka Connect helps us to handle the offset commit process, which saves us the trouble of implementing this error-prone part of connector development manually
+Distributed and scalable by default – Kafka Connect uses the existing group management protocol; we can add more workers to scale up a Kafka Connect cluster
+Streaming and batch integration – Kafka Connect is an ideal solution for bridging streaming and batch data systems in connection with Kafka's existing capabilities
+Transformations – these enable us to make simple and lightweight modifications to individual messages
+
+
+
+Source Connector Configuration :
+
+For the source connector, the reference configuration is available at $CONFLUENT_HOME/etc/kafka/connect-file-source.properties:
+
+name=local-file-source
+connector.class=FileStreamSource
+tasks.max=1
+topic=connect-test
+file=connect-data-test.txt
+
+
+For this to work then, let's create a basic file with some content:
+echo -e "Dip\nashraf\nmonstarlab\nkafka\ntesting\n" > $CONFLUENT_HOME/connect-data-test.txt
+
+
+
+Sink Connector Configuration :
+
+For our sink connector, we'll use the reference configuration at $CONFLUENT_HOME/etc/kafka/connect-file-sink.properties:
+
+name=local-file-sink
+connector.class=FileStreamSink
+tasks.max=1
+file=connecttestSink.txt
+topics=connect-test
+
+
+
+Worker Config :
+
+Finally, we have to configure the Connect worker, which will integrate our two connectors and do the work of reading from the source connector and writing to the sink connector.
+
+For that, we can use $CONFLUENT_HOME/etc/kafka/connect-standalone.properties:
+
+bootstrap.servers=localhost:9092
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter.schemas.enable=false
+value.converter.schemas.enable=false
+offset.storage.file.filename=/tmp/connect.offsets
+offset.flush.interval.ms=10000
+plugin.path=/home/ubuntu/confluent-7.0.1/share/filestream-connectors
+
+
+Kafka Connect in Standalone Mode :
+
+And with that, we can start our first connector setup:
+
+$CONFLUENT_HOME/bin/connect-standalone \
+  $CONFLUENT_HOME/etc/kafka/connect-standalone.properties \
+  $CONFLUENT_HOME/etc/kafka/connect-file-source.properties \
+  $CONFLUENT_HOME/etc/kafka/connect-file-sink.properties
+
+
+we can inspect the content of the topic using the command line:
+
+$CONFLUENT_HOME/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic connect-test --from-beginning
+
+{"schema":{"type":"string","optional":false},"payload":"foo"}
+{"schema":{"type":"string","optional":false},"payload":"bar"}
+
+
+And, if we have a look at the folder $CONFLUENT_HOME, we can see that a file test.sink.txt was created here:
+
+cat $CONFLUENT_HOME/connecttest.sink.txt
+foo
+bar  
+
+
+
+
+# Write log on the fly
+echo -e "foo\nbar\n" >> source-log.txt
+echo -e "kaka\nvalo\n" >> source-log.txt
+echo -e "kafka\nvalo\nchele\n" >> source-log.txt
+echo -e "trying\ncarries\nreturn\r" >> source-log.txt
+
+
+# Write a simple shell script for log writing
+# !/bin/bash
+date >> $CONFLUENT_HOME/source-log.txt
+
+# run after an interval
+watch --interval 1 ~/test.sh
