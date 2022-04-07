@@ -3,19 +3,19 @@
 # Mysql to Elasticsearch
 In this documentation, we will see
 
-1. Problem Statement
-2. Kafka Connect
-2. Kafka Connectors
-3. Connector Cencepts
-4. Streaming Changes from Mysql to Elasticsearch 
-1. Mysql Configuration
-1. Register Debizium Mysql Source Connctor
-2. Elasticsearch & Kibana Configuration
-1. Register Elasticsearch Sink Connector
-1. View Elasticsearch data from Kibana
-2. Fulltext Search on Customer data using Kibana
-3. Implement Global Search Service in Springboot
-4. Tryout Global Search Service REST APIs
+1. [Problem Statement](#problem-statement)
+2. [Kafka Connect](#kafka-connect)
+4. [Kafka Connectors](#kafka-connectors)
+5. [Connector Cencepts](connector-concepts)
+6. [Streaming Changes from Mysql to Elasticsearch](#streaming-changes-from-mysql-to-elasticsearch) 
+7. [Mysql Configuration](#mysql-configuration)
+8. [Register Debizium Mysql Source Connctor](#register-debizium-mysql-source-connctor)
+9. [Elasticsearch & Kibana Configuration](#elasticsearch--kibana-configuration)
+10. [Register Elasticsearch Sink Connector](#register-elasticsearch-sink-connector)
+11. [View Elasticsearch data from Kibana](#view-elasticsearch-data-from-kibana)
+12. [Fulltext Search on Customer data using Kibana](#fulltext-search-on-customer-data-using-kibana)
+13. [Implement Global Search Service in Springboot](#implement-global-search-service-in-springboot)
+14. [Tryout Global Search Service REST APIs](#tryout-global-search-service-rest-apis)
 
 
 ## Problem Statement
