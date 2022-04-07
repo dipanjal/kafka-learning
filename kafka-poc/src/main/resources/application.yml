@@ -27,7 +27,7 @@ spring:
 
 mysql-to-es:
   auto-log:
-    enabled: true
+    enabled: false
     count: 10
     delay: 1000
 

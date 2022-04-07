@@ -57,7 +57,7 @@ public class ESCustomerService implements SearchService {
     public List<Customer> customerGlobalSearch(String phrase) throws IOException {
         QueryBuilder queryBuilder1 = this.buildDynamicQuery(
                 phrase,
-                SearchFieldConstant.getFieldsAsList(SearchFieldConstant.CUSTOMER_GLOBAL_SEARCH_FIELDS)
+                List.of("first_name", "last_name", "email", "address")
         );
 
         SearchRequest request = new SearchRequest(ElasticSearchConfig.INDEX)

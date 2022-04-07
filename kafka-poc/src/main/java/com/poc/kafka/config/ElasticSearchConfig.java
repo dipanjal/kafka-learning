@@ -15,8 +15,6 @@ public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
     private String elasticsearchUri;
 
     public final static String INDEX = "mysql0.inventory.customers";
-    public final static String TYPE = "_doc";
-
 
     @Override
     @Bean
