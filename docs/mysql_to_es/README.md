@@ -21,7 +21,7 @@ In this documentation, we will see
 ## Problem Statement
 Fast searching capability, Realtime data ingestion are very cross-cutting needs for modern applications. Suppose we are building a *Real-Estate Business* service where Sellers can Register  themselves and Buyers can search by `Seller Name`, `Email`, `Address` etc and `Mysql` is our primary Datasource.
 
-We were going well with our good old Mysql Database untill our Service got public attention and our Mysql DB is getting populated with large amount of data. Because as the data is growing our Search is getting slower. To solve this issue we came up with `Elasticsearch` and agreed to use it as a search engine for our `Global Search Feature`. 
+We were going well with our good old `Mysql Like Query` untill our Service got public attention and our Mysql DB is getting populated with large amount of data. Because as the data is growing our `Global Search` is getting slower. Then we thought about `Mysql Full-text Search` but Mysql has limitations on Full-text searching along with Large Indexing problem for `Data Intensive` applications. To solve this problem, we came up with [`Elasticsearch`](https://www.elastic.co/what-is/elasticsearch) and agreed to use it as a search engine for our `Global Search Feature`. 
 
 But at the same time we can not abandone `Mysql` DB because our *customer registration*, *property listing* are still using it as the main Database. So, All we can do is **`Replicate`** these data from **`Mysql to Elasticseach`** database.
 
@@ -362,3 +362,4 @@ Boom!!
 * [https://turkogluc.com/apache-kafka-connect-introduction/](https://turkogluc.com/apache-kafka-connect-introduction/)
 * [https://developer.confluent.io/learn-kafka/kafka-connect/how-connectors-work/?_ga=2.43259244.837371935.1649245798-1948065767.1649245798#connectors](https://developer.confluent.io/learn-kafka/kafka-connect/how-connectors-work/?_ga=2.43259244.837371935.1649245798-1948065767.1649245798#connectors)
 * [https://docs.confluent.io/platform/current/connect/references/restapi.html](https://docs.confluent.io/platform/current/connect/references/restapi.html)
+* [https://www.elastic.co/what-is/elasticsearch](https://www.elastic.co/what-is/elasticsearch)
